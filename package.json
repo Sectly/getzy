@@ -5,7 +5,7 @@
     "main": "getzy.js",
     "type": "commonjs",
     "bin": {
-        "getzy": "./getzy-cli.js"
+        "getzy": "getzy-cli.js"
     },
     "exports": {
         ".": "./getzy.js"
@@ -41,7 +41,7 @@
     "license": "BSD-3-Clause",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Sectly/getzy.git"
+        "url": "git+https://github.com/Sectly/getzy.git"
     },
     "bugs": {
         "url": "https://github.com/Sectly/getzy/issues"
