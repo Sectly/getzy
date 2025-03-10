@@ -1,0 +1,50 @@
+{
+    "name": "getzy",
+    "version": "1.0.0",
+    "description": "A tiny yet capable HTTP/HTTPS client for Node.js. Native. Promise-based. Pluggable.",
+    "main": "getzy.js",
+    "type": "commonjs",
+    "bin": {
+        "getzy": "./getzy-cli.js"
+    },
+    "exports": {
+        ".": "./getzy.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "files": [
+        "getzy.js",
+        "getzy-cli.js",
+        "LICENSE",
+        "README.md",
+        "Documentation.md"
+    ],
+    "keywords": [
+        "http",
+        "https",
+        "client",
+        "fetch",
+        "request",
+        "retry",
+        "redirect",
+        "middleware",
+        "promise",
+        "native",
+        "nodejs",
+        "plugin"
+    ],
+    "author": "Sectly",
+    "license": "BSD-3-Clause",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sectly/getzy.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Sectly/getzy/issues"
+    },
+    "homepage": "https://github.com/Sectly/getzy#readme",
+    "engines": {
+        "node": ">=16"
+    }
+}
