@@ -14,11 +14,14 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "files": [
+        ".gitignore",
         "getzy.js",
         "getzy-cli.js",
         "LICENSE",
         "README.md",
-        "Documentation.md"
+        "Documentation.md",
+        "package-lock.json",
+        "package.json"
     ],
     "keywords": [
         "http",
@@ -46,5 +49,8 @@
     "homepage": "https://github.com/Sectly/getzy#readme",
     "engines": {
         "node": ">=16"
+    },
+    "dependencies": {
+        "getzy": "file:"
     }
 }
