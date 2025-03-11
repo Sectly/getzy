@@ -50,8 +50,5 @@
     "homepage": "https://github.com/Sectly/getzy#readme",
     "engines": {
         "node": ">=16"
-    },
-    "dependencies": {
-        "getzy": "file:"
     }
 }
