@@ -7,19 +7,19 @@
 
 ## 📚 Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
   - [As a Library](#as-a-library)
   - [CLI Usage](#cli-usage)
-- [Request Options](#request-options)
-- [Constructor & Configuration](#constructor--configuration)
-- [Middleware & Integrations](#middleware--integrations)
-- [API](#api)
-- [Error Handling](#error-handling)
-- [Related](#related)
-- [Contributing](#contributing)
-- [License](#license)
+- [Request Options](#-request-options)
+- [Constructor & Configuration](#-constructor--configuration)
+- [Middleware & Integrations](#-middleware--integrations)
+- [API](#-api)
+- [Error Handling](#-error-handling)
+- [Related](#-related)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
@@ -180,7 +180,7 @@ Piping is supported:
 
 ---
 
-## ⚙️ Request Options
+## 🪛 Request Options
 
 Each request method accepts an optional `options` object:
 
