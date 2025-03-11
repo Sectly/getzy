@@ -1,7 +1,7 @@
 // @Name: Getzy
 // @Description: A tiny yet capable HTTP/HTTPS client for Node.js. Native. Promise-based. Pluggable.
 // @Author: @Sectly
-// @Version: 1.0.0
+// @Version: 1.0.1
 // @License: BSD 3-Clause License
 
 /**
@@ -111,33 +111,38 @@ class Getzy {
         if (config.defaultHeaders && typeof config.defaultHeaders !== 'object') {
             throw new Error('defaultHeaders must be an object');
         }
+
         this.defaultHeaders = config.defaultHeaders || { 'Accept': 'application/json' };
 
         if (config.defaultMaxRedirects !== undefined && !Number.isInteger(config.defaultMaxRedirects)) {
             throw new Error('defaultMaxRedirects must be an integer');
         }
+
         this.defaultMaxRedirects = config.defaultMaxRedirects !== undefined ? config.defaultMaxRedirects : 3;
 
         if (config.defaultMaxRetryDelay !== undefined && !Number.isInteger(config.defaultMaxRetryDelay)) {
             throw new Error('defaultMaxRetryDelay must be an integer');
         }
+
         this.defaultMaxRetryDelay = config.defaultMaxRetryDelay !== undefined ? config.defaultMaxRetryDelay : 2000;
 
         if (config.defaultTimeout !== undefined && !Number.isInteger(config.defaultTimeout)) {
             throw new Error('defaultTimeout must be an integer');
         }
+
         this.defaultTimeout = config.defaultTimeout !== undefined ? config.defaultTimeout : 10000;
 
         if (config.defaultRetries !== undefined && !Number.isInteger(config.defaultRetries)) {
             throw new Error('defaultRetries must be an integer');
         }
+
         this.defaultRetries = config.defaultRetries !== undefined ? config.defaultRetries : 0;
 
         if (config.defaultBaseRetryDelay !== undefined && !Number.isInteger(config.defaultBaseRetryDelay)) {
             throw new Error('defaultBaseRetryDelay must be an integer');
         }
-        this.defaultBaseRetryDelay = config.defaultBaseRetryDelay !== undefined ? config.defaultBaseRetryDelay : 500;
 
+        this.defaultBaseRetryDelay = config.defaultBaseRetryDelay !== undefined ? config.defaultBaseRetryDelay : 500;
         this.middlewares = { before: [], after: [] };
         this.middlewareErrorHandler = null;
     }
@@ -231,6 +236,7 @@ class Getzy {
      */
     async _runMiddleware(phase, ctx, result = null) {
         let currentCtx = ctx;
+
         for (const mw of this.middlewares[phase]) {
             try {
                 const returned = await mw({ ctx: currentCtx, result });
@@ -243,6 +249,7 @@ class Getzy {
                     if (typeof returned.result !== 'object') {
                         throw new Error(`Middleware returned an invalid result`);
                     }
+
                     return { ctx: returned.ctx, result: returned.result };
                 }
 
@@ -275,11 +282,21 @@ class Getzy {
 
         // Run "before" middleware
         const pre = await this._runMiddleware('before', ctx);
-        ctx = pre.ctx;
+        
+        if (pre && pre.ctx) {
+            ctx = pre.ctx;
+        } else {
+            throw new Error(`Middleware returned an invalid ctx`);
+        }
 
-        if (pre.result !== undefined) {
+        if (pre && pre.result !== undefined) {
             const post = await this._runMiddleware('after', ctx, pre.result);
-            return post.result;
+            
+            if (post && post.result) {
+                return post.result;
+            }
+        } else {
+            throw new Error(`Middleware returned an invalid output`);
         }
 
         const urlObj = new URL(ctx.url);
