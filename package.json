@@ -1,6 +1,6 @@
 {
     "name": "getzy",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A tiny yet capable HTTP/HTTPS client for Node.js. Native. Promise-based. Pluggable.",
     "main": "getzy.js",
     "type": "commonjs",
@@ -33,6 +33,7 @@
         "redirect",
         "middleware",
         "promise",
+        "get",
         "native",
         "nodejs",
         "plugin"
