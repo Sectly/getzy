@@ -3,7 +3,7 @@
 // @Name: Getzy CLI
 // @Description: The CLI for the tiny yet capable HTTP/HTTPS client for Node.js. Native. Promise-based. Pluggable.
 // @Author: @Sectly
-// @Version: 1.0.0
+// @Version: 1.0.1
 // @License: BSD 3-Clause License
 
 /**
@@ -126,10 +126,12 @@ async function parseArgs() {
       case '-x':
       case '-X':
         method = args[++i]?.toLowerCase();
+
         if (!validMethods.has(method)) {
           console.error(`❌ Invalid HTTP method: ${method}`);
           process.exit(4);
         }
+
         break;
 
       case '--json':
@@ -284,9 +286,13 @@ async function makeRequest() {
   try {
     const res = await client[method](url, options);
 
+    if (!res) {
+      throw new Error(`❌ {url} returned null`);
+    }
+
     if (!silent) {
-      console.error(`✅ ${res.statusCode} ${res.statusText}`);
-      console.error('↩ Headers:', JSON.stringify(res.headers, null, 2));
+      console.log(`✅ ${res.statusCode} ${res.statusText}`);
+      console.log('↩ Headers:', JSON.stringify(res.headers, null, 2));
     }
 
     const output =
@@ -300,8 +306,11 @@ async function makeRequest() {
     console.error(`\n❌ ${err.message}`);
 
     if (res) {
-      console.error(`Status: ${res.statusCode}`);
-      console.error('Headers:', JSON.stringify(res.headers, null, 2));
+      if (!silent) {
+        console.error(`Status: ${res.statusCode}`);
+        console.error('Headers:', JSON.stringify(res.headers, null, 2));
+      }
+
       console.error(
         'Body:',
         typeof res.body === 'object'
